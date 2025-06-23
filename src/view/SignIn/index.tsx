@@ -25,7 +25,7 @@ function SignIn() {
                 <input
                   type='text'
                   id='name'
-                  className='w-full text-xl p-2 border-b-1 border-blue-300 text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
+                  className='w-full bg-transparent text-xl p-2 border-b-1 border-blue-300 text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
                   placeholder='Ingrese su usuario'
                   required
 
