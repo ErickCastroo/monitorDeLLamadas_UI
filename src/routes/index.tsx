@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Layout } from '@/components/Layout'
 import { Home } from '@/view/Home'
+import { SignIn } from '@/view/SignIn'
+import { SignUp } from '@/view/SignUp'
 
 function Rutas() {
   return (
@@ -13,8 +15,8 @@ function Rutas() {
         </Route>
 
         <Route>
-          <Route path='/signIn' />
-          <Route path='/signUp' />
+          <Route path='/signIn' element={<SignIn/>} />
+          <Route path='/signUp'element={<SignUp/>} />
         </Route>
       </Routes>
     </BrowserRouter>
