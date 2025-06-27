@@ -7,7 +7,6 @@ export type Cliente = {
   saldo: number
   telefono: string
   seguimiento?: string
-
 }
 
 export const columns: ColumnDef<Cliente>[] = [

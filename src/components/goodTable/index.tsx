@@ -137,7 +137,6 @@ export function Llamadas() {
               </TableRow>
             ))}
           </TableHeader>
-
           <TableBody>
             {rows.length ? rows.map(row => (
               <TableRow key={row.id} className='hover:bg-gray-50'>
