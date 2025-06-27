@@ -30,16 +30,16 @@ function ExcelFile() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className='flex flex-col items-center justify-center h-screen'>
       <form onSubmit={peticion}>
         <input
-          type="file"
-          name="file"
-          id="file"
+          type='file'
+          name='file'
+          id='file'
           onChange={handleChange}
-          className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+          className='file-input file-input-bordered file-input-primary w-full max-w-xs'
         />
-        <button type="submit" className="btn btn-primary mt-4">
+        <button type='submit' className='btn btn-primary mt-4'>
           Enviar
         </button>
       </form>

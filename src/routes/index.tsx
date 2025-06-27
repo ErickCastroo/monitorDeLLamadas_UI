@@ -13,7 +13,6 @@ function Rutas() {
           <Route path='/' element={<Home />} index />
           <Route path='*' element={<h1 className='text-9xl text-purple-600'>404 Not Found</h1>} />
         </Route>
-
         <Route>
           <Route path='/signIn' element={<SignIn/>} />
           <Route path='/signUp'element={<SignUp/>} />

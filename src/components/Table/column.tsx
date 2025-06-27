@@ -1,4 +1,4 @@
-import type { ColumnDef } from "@tanstack/react-table"
+import type { ColumnDef } from '@tanstack/react-table'
 
 export type Payment = {
   cuenta: string
@@ -12,33 +12,33 @@ export type Payment = {
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "cuenta",
-    header: "Cuenta",
+    accessorKey: 'cuenta',
+    header: 'Cuenta',
     size: 150,
   },
   {
-    accessorKey: "nombre",
-    header: "Nombre",
+    accessorKey: 'nombre',
+    header: 'Nombre',
     size: 200,
   },
   {
-    accessorKey: "domicilio",
-    header: "Domicilio",
+    accessorKey: 'domicilio',
+    header: 'Domicilio',
     size: 250,
   },
   {
-    accessorKey: "saldo",
-    header: "Saldo",
+    accessorKey: 'saldo',
+    header: 'Saldo',
     size: 100,
   },
   {
-    accessorKey: "telefono",
-    header: "Teléfono",
+    accessorKey: 'telefono',
+    header: 'Teléfono',
     size: 150,
   },
   {
-    accessorKey: "seguimiento",
-    header: "Seguimiento",
+    accessorKey: 'seguimiento',
+    header: 'Seguimiento',
     size: 200,
   },
 ]
