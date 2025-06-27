@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 
-export type Payment = {
+export type Cliente = {
   cuenta: string
   nombre: string
   domicilio: string
@@ -10,7 +10,7 @@ export type Payment = {
 
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Cliente>[] = [
   {
     accessorKey: 'cuenta',
     header: 'Cuenta',

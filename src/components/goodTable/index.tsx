@@ -1,5 +1,6 @@
 // src/components/Table/Table.tsx
 import * as React from 'react'
+import { Modal } from '@/components/Modal'
 import {
   useReactTable,
   getCoreRowModel,
@@ -8,7 +9,7 @@ import {
   flexRender,
   type ColumnFiltersState,
 } from '@tanstack/react-table'
-import { columns as rawColumns } from '@/components/Table/column'
+import { columns as rawColumns, type Cliente } from '@/components/Table/column'
 import { payments as rawPayments } from '@/components/Table/data'
 
 import { Input } from '@/components/ui/input'
@@ -34,6 +35,8 @@ import {
 export function Llamadas() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [filterValue, setFilterValue] = React.useState('')
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const [selectedCliente, setSelectedCliente] = React.useState<Cliente | null>(null)
 
   const columns = React.useMemo(() => {
     const base = [...rawColumns]
@@ -49,12 +52,17 @@ export function Llamadas() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(row.original.cuenta)}>
-              Copiar cuenta
+            <DropdownMenuLabel>Llamar</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => {
+                setSelectedCliente(row.original)
+                setModalOpen(true)
+              }}
+            >
+              Respuesta
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Ver detalles</DropdownMenuItem>
+            <DropdownMenuItem>Ver Cliente</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ),
@@ -67,6 +75,7 @@ export function Llamadas() {
   React.useEffect(() => {
     const timeout = setTimeout(() => table.getColumn('cuenta')?.setFilterValue(filterValue), 300)
     return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterValue])
 
   const table = useReactTable({
@@ -91,6 +100,12 @@ export function Llamadas() {
           onChange={(e) => setFilterValue(e.target.value)}
           className='max-w-xs'
         />
+        <Modal
+          open={modalOpen}
+          onOpenChange={setModalOpen}
+          cliente={selectedCliente}
+        />
+
 
         <div className='space-x-2 flex items-center'>
           <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
