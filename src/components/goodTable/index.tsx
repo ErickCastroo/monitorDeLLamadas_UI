@@ -1,6 +1,9 @@
 // src/components/Table/Table.tsx
 import * as React from 'react'
 import { Modal } from '@/components/Modal'
+import { useQuery } from '@tanstack/react-query'
+import { GetCliente } from '@/api/Clientes'
+
 import {
   useReactTable,
   getCoreRowModel,
@@ -10,7 +13,6 @@ import {
   type ColumnFiltersState,
 } from '@tanstack/react-table'
 import { columns as rawColumns, type Cliente } from '@/components/Table/column'
-import { payments as rawPayments } from '@/components/Table/data'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -73,11 +75,18 @@ export function Llamadas() {
     return base
   }, [])
 
+  const { data: clientes, isLoading, isError, error } = useQuery<Cliente[]>({
+    queryKey: ['clientes'],
+    queryFn: GetCliente,
+  })
+
   const data = React.useMemo(() => {
+    if (!clientes) return []
     return mostrarSoloSinSeguimiento
-      ? rawPayments.filter(cliente => !cliente.seguimiento)
-      : rawPayments
-  }, [mostrarSoloSinSeguimiento])
+      ? clientes.filter(cliente => !cliente.seguimiento)
+      : clientes
+  }, [clientes, mostrarSoloSinSeguimiento])
+
 
   React.useEffect(() => {
     const timeout = setTimeout(() => table.getColumn('cuenta')?.setFilterValue(filterValue), 300)
@@ -98,6 +107,10 @@ export function Llamadas() {
 
   const rows = table.getRowModel().rows
 
+
+  if (isLoading) return <div>Cargando...</div>
+  if (isError) return <div>Error: {error instanceof Error ? error.message : 'Ocurrió un error'}</div>
+  if (!clientes || clientes.length === 0) return <div>No hay clientes registrados.</div>
   return (
     <div className='w-full space-y-6 p-4'>
       <div className='flex justify-between items-center gap-4 flex-wrap'>
@@ -113,7 +126,6 @@ export function Llamadas() {
           onOpenChange={setModalOpen}
           cliente={selectedCliente}
         />
-
         <div className="flex items-center gap-2">
           <Switch
             id="sin-seguimiento"
