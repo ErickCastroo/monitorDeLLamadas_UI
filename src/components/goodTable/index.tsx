@@ -3,38 +3,17 @@ import * as React from 'react'
 import { Modal } from '@/components/Modal'
 import { useQuery } from '@tanstack/react-query'
 import { GetCliente } from '@/api/Clientes'
-
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  flexRender,
-  type ColumnFiltersState,
-} from '@tanstack/react-table'
-import { columns as rawColumns, type Cliente } from '@/components/Table/column'
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
+import { useReactTable, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, flexRender, type ColumnFiltersState } from '@tanstack/react-table'
 
 import { Input } from '@/components/ui/input'
+import { DropletLoader } from '@/components/loading'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import { columns as rawColumns, type Cliente } from '@/components/Table/column'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 
 export function Llamadas() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -58,16 +37,16 @@ export function Llamadas() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Llamar</DropdownMenuLabel>
+            <DropdownMenuItem>
+              Respuesta
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
                 setSelectedCliente(row.original)
                 setModalOpen(true)
               }}
-            >
-              Respuesta
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Ver Cliente</DropdownMenuItem>
+            >Ver Cliente</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ),
@@ -108,7 +87,7 @@ export function Llamadas() {
   const rows = table.getRowModel().rows
 
 
-  if (isLoading) return <div>Cargando...</div>
+  if (isLoading) return <DropletLoader />
   if (isError) return <div>Error: {error instanceof Error ? error.message : 'Ocurrió un error'}</div>
   if (!clientes || clientes.length === 0) return <div>No hay clientes registrados.</div>
   return (
