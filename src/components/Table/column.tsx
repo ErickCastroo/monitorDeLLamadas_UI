@@ -6,7 +6,7 @@ export type Cliente = {
   domicilio: string
   saldo: number
   telefono: string
-  seguimiento: string
+  seguimiento?: string
 
 }
 
@@ -35,10 +35,5 @@ export const columns: ColumnDef<Cliente>[] = [
     accessorKey: 'telefono',
     header: 'Teléfono',
     size: 150,
-  },
-  {
-    accessorKey: 'seguimiento',
-    header: 'Seguimiento',
-    size: 200,
   },
 ]

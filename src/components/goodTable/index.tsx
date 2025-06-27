@@ -14,6 +14,8 @@ import { payments as rawPayments } from '@/components/Table/data'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
 import {
   DropdownMenu,
@@ -37,6 +39,7 @@ export function Llamadas() {
   const [filterValue, setFilterValue] = React.useState('')
   const [modalOpen, setModalOpen] = React.useState(false)
   const [selectedCliente, setSelectedCliente] = React.useState<Cliente | null>(null)
+  const [mostrarSoloSinSeguimiento, setMostrarSoloSinSeguimiento] = React.useState(true)
 
   const columns = React.useMemo(() => {
     const base = [...rawColumns]
@@ -70,7 +73,11 @@ export function Llamadas() {
     return base
   }, [])
 
-  const data = React.useMemo(() => rawPayments, [])
+  const data = React.useMemo(() => {
+    return mostrarSoloSinSeguimiento
+      ? rawPayments.filter(cliente => !cliente.seguimiento)
+      : rawPayments
+  }, [mostrarSoloSinSeguimiento])
 
   React.useEffect(() => {
     const timeout = setTimeout(() => table.getColumn('cuenta')?.setFilterValue(filterValue), 300)
@@ -81,7 +88,7 @@ export function Llamadas() {
   const table = useReactTable({
     data,
     columns,
-    pageCount: Math.ceil(rawPayments.length / 10),
+    pageCount: Math.ceil(data.length / 10),
     state: { columnFilters },
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -93,27 +100,27 @@ export function Llamadas() {
 
   return (
     <div className='w-full space-y-6 p-4'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center gap-4 flex-wrap'>
         <Input
           placeholder='Filtrar por numero de Cuenta...'
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className='max-w-xs'
         />
+
         <Modal
           open={modalOpen}
           onOpenChange={setModalOpen}
           cliente={selectedCliente}
         />
 
-
-        <div className='space-x-2 flex items-center'>
-          <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-            <ChevronLeft className='mr-1 h-4 w-4' /> Anterior
-          </Button>
-          <Button variant='outline' size='sm' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-            Siguiente <ChevronRight className='ml-1 h-4 w-4' />
-          </Button>
+        <div className="flex items-center gap-2">
+          <Switch
+            id="sin-seguimiento"
+            checked={mostrarSoloSinSeguimiento}
+            onCheckedChange={setMostrarSoloSinSeguimiento}
+          />
+          <Label htmlFor="sin-seguimiento">{mostrarSoloSinSeguimiento ? 'Sin seguimiento' : 'Todos'}</Label>
         </div>
       </div>
 
@@ -149,6 +156,15 @@ export function Llamadas() {
             )}
           </TableBody>
         </Table>
+
+      </div>
+      <div className='space-x-2 flex items-center'>
+        <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+          <ChevronLeft className='mr-1 h-4 w-4' /> Anterior
+        </Button>
+        <Button variant='outline' size='sm' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+          Siguiente <ChevronRight className='ml-1 h-4 w-4' />
+        </Button>
       </div>
     </div>
   )
