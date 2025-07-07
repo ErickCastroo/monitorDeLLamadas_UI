@@ -30,7 +30,7 @@ export function Llamadas() {
       id: 'acciones',
       header: 'Acciones',
       cell: ({ row }) => (
-        <DropdownMenu>
+        <DropdownMenu >
           <DropdownMenuTrigger asChild>
             <Button variant='ghost' size='icon'>
               <span className='sr-only'>Opciones</span>
@@ -96,13 +96,13 @@ export function Llamadas() {
   if (isError) return <div>Error: {error instanceof Error ? error.message : 'Ocurrió un error'}</div>
   if (!clientes || clientes.length === 0) return <div>No hay clientes registrados.</div>
   return (
-    <div className='w-full space-y-6 p-4'>
+    <div className='w-full space-y-6 p-3'>
       <div className='flex justify-between items-center gap-4 flex-wrap'>
         <Input
-          placeholder='Filtrar por numero de Cuenta...'
+          placeholder='Filtrar por número de Cuenta...'
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
-          className='max-w-xs'
+          className='max-w-xs border-blue-500 focus:ring-blue-500 focus:border-blue-500'
         />
 
         <Modal
@@ -116,23 +116,27 @@ export function Llamadas() {
           onOpenChange={setModalROpen}
           cliente={selectedCliente}
         />
+
         <div className="flex items-center gap-2">
           <Switch
             id="sin-seguimiento"
             checked={mostrarSoloSinSeguimiento}
             onCheckedChange={setMostrarSoloSinSeguimiento}
+            className="data-[state=checked]:bg-blue-500 cursor-pointer data-[state=unchecked]:bg-gray-300"
           />
-          <Label htmlFor="sin-seguimiento">{mostrarSoloSinSeguimiento ? 'Sin seguimiento' : 'Todos'}</Label>
+          <Label htmlFor="sin-seguimiento" className="text-blue-700 font-medium">
+            {mostrarSoloSinSeguimiento ? 'Sin seguimiento' : 'Todos'}
+          </Label>
         </div>
       </div>
 
-      <div className='rounded-lg border shadow-sm overflow-auto'>
+      <div className='rounded-xl border border-blue-100 shadow-sm overflow-auto'>
         <Table className='min-w-full divide-y divide-gray-200'>
           <TableHeader>
             {table.getHeaderGroups().map(hg => (
-              <TableRow key={hg.id}>
+              <TableRow key={hg.id} className='bg-blue-50'>
                 {hg.headers.map(header => (
-                  <TableHead key={header.id} className='bg-gray-50 text-left px-4 py-2'>
+                  <TableHead key={header.id} className='text-blue-800 font-semibold px-4 py-3 tracking-wide'>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
@@ -141,7 +145,7 @@ export function Llamadas() {
           </TableHeader>
           <TableBody>
             {rows.length ? rows.map(row => (
-              <TableRow key={row.id} className='hover:bg-gray-50'>
+              <TableRow key={row.id} className='hover:bg-blue-50 transition-colors duration-200'>
                 {row.getVisibleCells().map(cell => (
                   <TableCell key={cell.id} className='px-4 py-2'>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -150,23 +154,36 @@ export function Llamadas() {
               </TableRow>
             )) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className='text-center px-4 py-8'>
+                <TableCell colSpan={columns.length} className='text-center px-4 py-8 text-gray-500'>
                   No hay resultados.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-
       </div>
-      <div className='space-x-2 flex items-center'>
-        <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+
+      <div className='space-x-2 flex items-center justify-end'>
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+          className='border-blue-500 text-blue-700 hover:bg-blue-50 cursor-pointer'
+        >
           <ChevronLeft className='mr-1 h-4 w-4' /> Anterior
         </Button>
-        <Button variant='outline' size='sm' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+          className='border-blue-500 text-blue-700 hover:bg-blue-50 cursor-pointer'
+        >
           Siguiente <ChevronRight className='ml-1 h-4 w-4' />
         </Button>
       </div>
     </div>
+
   )
 }
