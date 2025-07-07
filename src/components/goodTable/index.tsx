@@ -97,7 +97,7 @@ export function Llamadas() {
   if (!clientes || clientes.length === 0) return <div>No hay clientes registrados.</div>
   return (
     <div className='w-full space-y-6 p-3'>
-      <div className='flex justify-between items-center gap-4 flex-wrap'>
+      <div className='flex justify-between items-center gap-4 flex-wrap p-4 rounded-lg bg-white border border-blue-100 shadow-sm'>
         <Input
           placeholder='Filtrar por número de Cuenta...'
           value={filterValue}
@@ -130,13 +130,14 @@ export function Llamadas() {
         </div>
       </div>
 
-      <div className='rounded-xl border border-blue-100 shadow-sm overflow-auto'>
+      {/* Tabla principal */}
+      <div className='rounded-xl border border-blue-200 bg-white shadow-md hover:shadow-lg transition-shadow duration-300 overflow-auto'>
         <Table className='min-w-full divide-y divide-gray-200'>
           <TableHeader>
             {table.getHeaderGroups().map(hg => (
               <TableRow key={hg.id} className='bg-blue-50'>
                 {hg.headers.map(header => (
-                  <TableHead key={header.id} className='text-blue-800 font-semibold px-4 py-3 tracking-wide'>
+                  <TableHead key={header.id} className='text-blue-800 font-semibold px-4 py tracking-wide'>
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
@@ -163,6 +164,7 @@ export function Llamadas() {
         </Table>
       </div>
 
+      {/* Paginación */}
       <div className='space-x-2 flex items-center justify-end'>
         <Button
           variant='outline'
@@ -184,6 +186,7 @@ export function Llamadas() {
         </Button>
       </div>
     </div>
+
 
   )
 }
