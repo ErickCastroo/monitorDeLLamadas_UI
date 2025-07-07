@@ -43,7 +43,7 @@ function ModalResponse({ open, onOpenChange, cliente }: ModalProps) {
           </div>
         </div>
 
-        <Separator className="my-4 bg-blue-200" />
+        <Separator className="my-2 bg-blue-200" />
 
         <Respuesta />
       </DialogContent>

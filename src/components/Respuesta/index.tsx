@@ -1,6 +1,6 @@
 function Respuesta() {
   return (
-    <form className="p-4 space-y-4">
+    <form className="space-y-4">
       <div>
         <label
           htmlFor="respuesta"
