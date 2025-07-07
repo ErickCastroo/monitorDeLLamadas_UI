@@ -1,7 +1,11 @@
 import { Link, Outlet } from 'react-router-dom'
 
-import { PiPhoneCallBold, PiMicrosoftExcelLogoBold } from 'react-icons/pi'
+import { PiPhoneCallBold } from 'react-icons/pi'
 import { TbSettingsBolt } from 'react-icons/tb'
+import { TfiHelpAlt } from "react-icons/tfi"
+
+// PiMicrosoftExcelLogoBold
+
 
 function Layout() {
   return (
@@ -20,9 +24,13 @@ function Layout() {
                 <span className='text-xs'>Llamadas</span>
               </Link>
 
-              <Link to='/' className='flex flex-col items-center justify-center text-2xl hover:text-Primary dark:hover:text-PrimaryDark'>
+              {/* <Link to='/' className='flex flex-col items-center justify-center text-2xl hover:text-Primary dark:hover:text-PrimaryDark'>
                 <PiMicrosoftExcelLogoBold className='text-3xl' />
                 <span className='text-xs'>Excel</span>
+              </Link> */}
+              <Link to='/ayuda' className='flex flex-col items-center justify-center text-2xl hover:text-Primary dark:hover:text-PrimaryDark'>
+                <TfiHelpAlt className='text-3xl' />
+                <span className='text-xs'>Ayuda</span>
               </Link>
 
               <Link to='/' className='flex flex-col items-center justify-center text-2xl hover:text-Primary dark:hover:text-PrimaryDark'>
