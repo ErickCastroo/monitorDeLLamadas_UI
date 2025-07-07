@@ -1,6 +1,7 @@
 // src/components/Table/Table.tsx
 import * as React from 'react'
 import { Modal } from '@/components/Modal'
+import { ModalResponse } from '@/components/modalResponse'
 import { useQuery } from '@tanstack/react-query'
 import { GetCliente } from '@/api/Clientes'
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
@@ -19,6 +20,7 @@ export function Llamadas() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [filterValue, setFilterValue] = React.useState('')
   const [modalOpen, setModalOpen] = React.useState(false)
+  const [modalROpen, setModalROpen] = React.useState(false)
   const [selectedCliente, setSelectedCliente] = React.useState<Cliente | null>(null)
   const [mostrarSoloSinSeguimiento, setMostrarSoloSinSeguimiento] = React.useState(true)
 
@@ -37,9 +39,12 @@ export function Llamadas() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Llamar</DropdownMenuLabel>
-            <DropdownMenuItem>
-              Respuesta
-            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                setSelectedCliente(row.original)
+                setModalROpen(true)
+              }}
+            >Respuesta</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
@@ -103,6 +108,12 @@ export function Llamadas() {
         <Modal
           open={modalOpen}
           onOpenChange={setModalOpen}
+          cliente={selectedCliente}
+        />
+
+        <ModalResponse
+          open={modalROpen}
+          onOpenChange={setModalROpen}
           cliente={selectedCliente}
         />
         <div className="flex items-center gap-2">

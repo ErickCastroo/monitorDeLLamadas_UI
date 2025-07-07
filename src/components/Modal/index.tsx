@@ -69,7 +69,7 @@ function Modal({ open, onOpenChange, cliente }: ModalProps) {
               <strong>Seguimiento:</strong>
               <p className="text-muted-foreground">
                 {
-                  !cliente.seguimiento ? 'No hay seguimiento Aun' : <p className='text-green-700'>{cliente.seguimiento}</p>
+                  !cliente.seguimiento ? <p className='text-orange-500'>No hay seguimiento Aun</p> : <p className='text-green-700'>{cliente.seguimiento}</p>
                 }
               </p>
             </div>
