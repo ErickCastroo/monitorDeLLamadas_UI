@@ -5,7 +5,6 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
-
 import type { Cliente } from '../Table/column'
 import { User } from 'lucide-react'
 import { Respuesta } from '../Respuesta'
@@ -21,32 +20,35 @@ function ModalResponse({ open, onOpenChange, cliente }: ModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md p-6 rounded-2xl shadow-xl border bg-white">
+      <DialogContent className="max-w-md p-6 rounded-2xl shadow-xl border border-blue-100 bg-white">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold flex items-center gap-2">
-            <User className="h-5 w-5 text-primary" />
+          <DialogTitle className="text-xl font-semibold flex items-center gap-2 text-blue-700">
+            <User className="h-5 w-5 text-blue-500" />
             Información del Cliente
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-2">
-          <div className='text-xs text-gray-500 mb-4'>
-            <strong>Nombre:</strong> {cliente.nombre}
+        <div className="grid grid-cols-2 gap-y-2 text-sm text-blue-900 mt-2">
+          <div>
+            <span className="font-medium">Nombre:</span> {cliente.nombre}
           </div>
-          <div className='text-xs text-gray-500 mb-4'>
-            <strong>Teléfono:</strong> {cliente.telefono}
+          <div>
+            <span className="font-medium">Teléfono:</span> {cliente.telefono}
           </div>
-          <div className='text-xs text-gray-500 mb-4'>
-            <strong>Saldo a pagar:</strong> {cliente.saldo}
+          <div>
+            <span className="font-medium">Saldo a pagar:</span> {cliente.saldo}
           </div>
-          <div className='text-xs text-gray-500'>
-            <strong>Domicilio</strong> {cliente.domicilio}
+          <div className="col-span-2">
+            <span className="font-medium">Domicilio:</span> {cliente.domicilio}
           </div>
         </div>
-        <Separator />
+
+        <Separator className="my-4 bg-blue-200" />
+
         <Respuesta />
       </DialogContent>
-    </Dialog >
+    </Dialog>
   )
 }
+
 export { ModalResponse }
