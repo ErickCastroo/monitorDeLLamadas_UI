@@ -41,7 +41,7 @@ function Layout() {
           </div>
         </div>
       </header>
-      <section className='max-w-screen-2xl mx-auto mt-8'>
+      <section className='max-w-screen-2xl mx-auto my-5'>
         <Outlet />
       </section>
     </>

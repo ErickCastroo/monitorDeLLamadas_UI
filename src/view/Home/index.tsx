@@ -6,7 +6,7 @@ function Home() {
   return (
     <>
       <div className='max-w-screen-2xl mx-auto px-4 '>
-        <h1 className="text-3xl font-bold text-blue-700 text-center">
+        <h1 className="text-3xl font-bold text-blue-700 text-center my-5">
           Gestor de llamadas
         </h1>
         <Llamadas />

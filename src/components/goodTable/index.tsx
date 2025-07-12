@@ -96,7 +96,7 @@ export function Llamadas() {
   if (isError) return <div>Error: {error instanceof Error ? error.message : 'Ocurrió un error'}</div>
   if (!clientes || clientes.length === 0) return <div>No hay clientes registrados.</div>
   return (
-    <div className='w-full space-y-6 p-3'>
+    <div className='w-full space-y-6 px-3'>
       <div className='flex justify-between items-center gap-4 flex-wrap p-4 rounded-lg bg-white border border-blue-100 shadow-sm'>
         <Input
           placeholder='Filtrar por número de Cuenta...'
