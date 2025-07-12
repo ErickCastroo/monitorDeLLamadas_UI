@@ -10,8 +10,8 @@ import { TfiHelpAlt } from "react-icons/tfi"
 function Layout() {
   return (
     <>
-      <header className='bg-Secondary text-white py-2'>
-        <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center'>
+      <header className='bg-Secondary text-white py-3'>
+        <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between px-7 items-center'>
           <div className=''>
             <Link to='/' className='flex items-center'>
               <img src='./logooomapasBlanco.png' alt='Logo' className='h-16' />
